@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles/style.css') }}"
+    />
+    <title>dh</title>
+  </head>
+  <body>
+    <main class="main">
+      <div class="containers">
+        <h1 class="containers-title">Список контейнеров</h1>
+        <div class="containers-list">
+        {% for container in containers %}
+        <div class="container" id="{{container.id}}">
+          <div class="container-info">
+            <div class="container-info__item">
+              <div class="container-info__item-label">id:</div>
+              {{container.id}}
+            </div>
+            <div class="container-info__item">
+              <div class="container-info__item-label">name:</div>
+              {{container.name}}
+            </div>
+            <div class="container-info__item">
+              <div class="container-info__item-label">image:</div>
+              {{container.image}}
+            </div>
+            <div
+              class="container-status {{container.status}}"
+              title="{{container.status}}"
+            ></div>
+          </div>  
+          <div class="container-controls">
+
+            <button class="container-controls__button stop" 
+              title="Остановить"
+              {% if container.status == "exited" %} disabled {% endif %}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><rect x="9" y="9" width="6" height="6"></rect></svg>
+            </button>
+
+            <button class="container-controls__button pause" 
+              title="Пауза"
+              {% if container.status == "paused" %} disabled {% endif %}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="10" y1="15" x2="10" y2="9"></line><line x1="14" y1="15" x2="14" y2="9"></line></svg>
+            </button>
+
+            <button class="container-controls__button start"
+              title="Запустить" 
+              {% if container.status == "running" %} disabled {% endif %}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polygon points="10 8 16 12 10 16 10 8"></polygon></svg>
+            </button>
+
+            <button class="container-controls__button restart" 
+              title="Перезапустить"
+              {% if container.status == "restarting" %} disabled {% endif %}>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"> <path d="M2.5 2v6h6M21.5 22v-6h-6"/><path d="M22 11.5A10 10 0 0 0 3.2 7.2M2 12.5a10 10 0 0 0 18.8 4.2"/></svg>
+            </button>
+            
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      </div>
+    </main>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/script.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,133 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+body {
+  font-family: sans-serif;
+}
+
+.main {
+  max-width: 90%;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.containers {
+  padding: 20px;
+
+  &-list {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+  }
+ 
+  &-title {
+    margin-bottom: 20px;
+  }
+
+  .container {
+    width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    &-info {
+      position: relative;
+      padding: 6px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      &__item {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        &-label {
+          font-weight: bold;
+        }
+      }
+    }
+    &-status {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      border-radius: 100%;
+      width: 12px;
+      height: 12px;
+      &.running {
+        background-color: rgb(101, 206, 75);
+      }
+      &.exited {
+        background-color: tomato;
+      }
+      &.paused {
+        background-color: orange;
+      }
+      &.restarting {
+        background-color: blueviolet;
+      }
+    }
+
+    &-controls {
+      width: 100%;
+      height: 36px;
+      display: flex;
+      justify-content: space-around;
+      margin-top: 6px;
+      margin-top: auto;
+      &__button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+        width: 100%;
+        height: 100%;
+        background-color: rgb(233, 233, 233);
+        transition: background-color .1s;
+        &:first-child {
+          border-radius: 0 0 0px 4px;
+        }
+        &:last-child {
+          border-radius: 0 0 4px 0;
+        }
+        &:not(:last-child) {
+          border-right: 1px solid #ddd;
+        }
+        &:disabled {
+          pointer-events: none;
+          // background-color: rgb(126, 126, 126);
+          box-shadow: 0px 2px 3px 2px rgba(34, 60, 80, 0.2) inset;
+          svg {
+            stroke: #aaa;
+          }
+        }
+        &:hover {
+          background-color: rgb(216, 216, 216);
+          svg {
+            stroke: rgb(97, 125, 251);
+          }
+        }
+        svg {
+          transition: fill .1s, stroke .1s;
+          width: 24px;
+          height: 24px;
+          fill: none;
+          stroke: #000;
+        }
+
+      }
+    }
+  }
+}
